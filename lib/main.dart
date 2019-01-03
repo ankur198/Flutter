@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'mybox.dart';
-import 'stateful.dart';
+//import 'stateful.dart';
 import 'statefulmy.dart';
+import 'stateful2.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -32,7 +33,8 @@ class myclass extends StatelessWidget {
             //   color4: Colors.green,
             // ),
             //Counter()
-            Center(child: InteractiveButton())
+            // Center(child: InteractiveButton())
+            Counter()
         //body: MyButton(),
         );
   }
