@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CounterDisplay extends StatelessWidget {
-  CounterDisplay({this.count});
+  CounterDisplay(this.count) {
+    print("Counter was made with value $count");
+  }
 
   final int count;
 
@@ -12,7 +14,9 @@ class CounterDisplay extends StatelessWidget {
 }
 
 class CounterIncrementor extends StatelessWidget {
-  CounterIncrementor({this.onPressed});
+  CounterIncrementor(this.onPressed){
+    print("Incrementor was made");
+  }
 
   final VoidCallback onPressed;
 
@@ -44,8 +48,8 @@ class _CounterState extends State<Counter> {
   @override
   Widget build(BuildContext context) {
     return Row(children: <Widget>[
-      CounterIncrementor(onPressed: _increment),
-      CounterDisplay(count: _counter),
+      CounterIncrementor(_increment),
+      CounterDisplay(_counter),
     ]);
   }
 }

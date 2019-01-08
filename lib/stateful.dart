@@ -15,6 +15,7 @@ class _CounterState extends State<Counter> {
     setState(() {
       _counter++;
     });
+    if(_counter>10) _counter=0;
   }
 
   Widget abc() {
