@@ -25,11 +25,12 @@ import 'shoppingMy/Item.dart';
 //     ),
 //   ));
 // }
+List<Product> item = new List<Product>();
+
 void main() {
-  List<Product> item = new List<Product>();
-  item.add(new Product(name: "Shweta", inCart: false));
-  item.add(new Product(name: "Sumit", inCart: false));
-  item.add(new Product(name: "Ankur", inCart: false));
+  // item.add(new Product(name: "Shweta", inCart: false));
+  // item.add(new Product(name: "Sumit", inCart: false));
+  // item.add(new Product(name: "Ankur", inCart: false));
   runApp(MaterialApp(
     title: "sdfh",
     home: ListAll(products: item),
