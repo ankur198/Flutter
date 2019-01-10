@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:world/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Product {
   Product({this.name, this.inCart});
@@ -22,8 +23,9 @@ class ListItem extends StatelessWidget {
     } else
       return TextStyle(fontWeight: FontWeight.bold);
   }
-  Icon _getIcon(){
-    if(product.inCart){
+
+  Icon _getIcon() {
+    if (product.inCart) {
       return Icon(Icons.check_box);
     }
     return Icon(Icons.check_box_outline_blank);
@@ -96,15 +98,18 @@ class _ListAll extends State<ListAll> {
   void addValue() {
     //print("Yooo");
     setState(() {
-      item.add(Product(name: myController.text, inCart: false));
+      items.add(Product(name: myController.text, inCart: false));
       myController.text = "";
     });
     //print(item.length);
     print(products.length);
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
+    getdata();
     return Scaffold(
       appBar: AppBar(
         title: Text("My Shopping List"),
@@ -120,16 +125,30 @@ class _ListAll extends State<ListAll> {
           ),
           Container(
             padding: EdgeInsets.all(20),
-            child: Row(
+            child: Column(
               children: <Widget>[
-                Expanded(
-                    child: SizedBox(
-                        child: TextField(
-                  controller: myController,
-                ))),
-                RaisedButton(
-                  child: Icon(Icons.add),
-                  onPressed: addValue,
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: SizedBox(
+                            child: TextField(
+                      controller: myController,
+                    ))),
+                    RaisedButton(
+                      child: Icon(Icons.add),
+                      onPressed: addValue,
+                    )
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    RaisedButton(
+                      child: Text("save"),
+                      onPressed: savedata,
+                    ),
+                    RaisedButton(onPressed: getdata,
+                    child: Text("Get Data"),)
+                  ],
                 )
               ],
             ),
@@ -138,4 +157,25 @@ class _ListAll extends State<ListAll> {
       ),
     );
   }
+  Future savedata() async {
+  final shared = await SharedPreferences.getInstance();
+  var x = List<String>();
+  for (var item in items) {
+    shared.setBool(item.name, item.inCart);
+    x.add(item.name);
+  }
+  shared.setStringList("product", x);
 }
+
+Future getdata() async {
+  final shared = await SharedPreferences.getInstance();
+  var x = shared.getStringList("product");
+  
+  for (var item in x) {
+    var inc = shared.getBool(item);
+    items.add(Product(name: item, inCart: inc));
+  }    
+}
+}
+
+

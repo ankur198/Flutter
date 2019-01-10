@@ -25,7 +25,7 @@ import 'shoppingMy/Item.dart';
 //     ),
 //   ));
 // }
-List<Product> item = new List<Product>();
+List<Product> items = new List<Product>();
 
 void main() {
   // item.add(new Product(name: "Shweta", inCart: false));
@@ -33,7 +33,7 @@ void main() {
   // item.add(new Product(name: "Ankur", inCart: false));
   runApp(MaterialApp(
     title: "sdfh",
-    home: ListAll(products: item),
+    home: ListAll(products: items),
   ));
 }
 
